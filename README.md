@@ -3,7 +3,7 @@
 > Um jogo interativo de adivinhação desenvolvido inteiramente em portas lógicas.
 
 **Universidade Federal do Cariri (UFCA)** **Disciplina:** Circuitos Digitais  
-**Autora:** Lívia Oliveira
+**Autora:** Ana Lívia Oliveira
 
 ---
 
