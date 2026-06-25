@@ -1,0 +1,744 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>GUESS THE NUMBER</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="373803aa-bfc9-807d-8d33-f9d61349e955" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔢</span></div><h1 class="page-title" dir="auto">GUESS THE NUMBER</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="38a803aa-bfc9-8003-b7ae-c498eb1c9633" class="">Aluna: Ana Lívia de Oliveira Alves</p></div><div style="display:contents" dir="auto"><p id="38a803aa-bfc9-8038-ae95-efc94f7eb92a" class="">Matrícula: 2026010720</p></div><div style="display:contents" dir="auto"><h2 id="383803aa-bfc9-8057-b67f-c8a7efbe1183" class=""><strong>1. Comparador</strong></h2></div><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-80e3-9e76-df94ceb88341" class="bulleted-list"><li style="list-style-type:disc"><strong>O que faz:</strong> Recebe dois números binários de 4 bits (o palpite do jogador e o número aleatório do sistema) e ativa uma saída de confirmação apenas se eles forem exatamente iguais. Esse sinal é o responsável por acender o LED verde, indicando a condição de vitória.</li></ul></div><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-806b-86cd-ea36c714b289" class="bulleted-list"><li style="list-style-type:disc"><strong>Como implementar:</strong><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-801e-b743-f7f8d7d6bcdb" class="bulleted-list"><li style="list-style-type:circle">O circuito foi construído utilizando a lógica de verificação de igualdade bit a bit, separando o barramento de 4 bits com distribuidores (splitters).</li></ul></div><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-8069-8b59-e664de7dd6cd" class="bulleted-list"><li style="list-style-type:circle">Foram utilizadas 4 portas lógicas XNOR. Cada porta recebe um par de bits correspondentes das duas entradas (ex: o bit 0 do chute e o bit 0 do número aleatório). A porta XNOR retorna <code>1</code> apenas quando ambas as entradas são idênticas.</li></ul></div><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-808f-a327-f60990a1afb6" class="bulleted-list"><li style="list-style-type:circle">As 4 saídas das portas XNOR foram conectadas às entradas de uma única porta lógica AND de 4 entradas.</li></ul></div><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-807f-a34b-cdfb88c94423" class="bulleted-list"><li style="list-style-type:circle">Dessa forma, a porta AND só emitirá um sinal de saída <code>1</code> (verdadeiro) se todos os 4 pares de bits forem iguais simultaneamente, confirmando o acerto perfeito do jogador.</li></ul></div><div style="display:contents" dir="ltr"><figure id="383803aa-bfc9-803d-ac05-e909ea051430" class="image"><a href="image.png"><img style="width:703.9874877929688px" src="image.png"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><h2 id="38a803aa-bfc9-8066-b9b5-d5796550212b" class=""><strong>2. Decodificador para Display de 7 Segmentos</strong></h2></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80a9-adf4-eb8361c52f94" class="bulleted-list"><li style="list-style-type:disc"><strong>O que faz:</strong> Transforma o valor binário do palpite de 4 bits (de <code>0000</code> a <code>1111</code>) no formato necessário para acender os LEDs corretos de um display de 7 segmentos. Ele permite que o sistema exiba o chute do jogador em um formato visualmente legível, utilizando os símbolos hexadecimais (de 0 a F).</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-8035-8dae-f734b27495a7" class="bulleted-list"><li style="list-style-type:disc"><strong>Como implementar:</strong><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-8089-90d8-f49bd0e296c6" class="bulleted-list"><li style="list-style-type:circle">O circuito foi desenvolvido utilizando a ferramenta de <strong>Análise Combinacional</strong> do próprio simulador Logisim.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-8042-9e4a-dff7bbe52658" class="bulleted-list"><li style="list-style-type:circle">Foram declaradas 4 variáveis de entrada (representando os bits do palpite) e 7 variáveis de saída (representando os segmentos <em>a, b, c, d, e, f, g</em> do display).</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80f3-9466-dbc8b38e2581" class="bulleted-list"><li style="list-style-type:circle">A Tabela Verdade foi preenchida manualmente mapeando cada uma das 16 combinações binárias para os seus respectivos traços luminosos hexadecimais.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-8083-932d-d33418ff824c" class="bulleted-list"><li style="list-style-type:circle">Por fim, a ferramenta do Logisim foi utilizada para sintetizar a tabela verdade e gerar automaticamente o circuito combinacional final otimizado utilizando portas lógicas (AND, OR, NOT), eliminando a necessidade de desenhar manualmente os Mapas de Karnaugh para as 7 saídas.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="38a803aa-bfc9-8059-a700-d90fff6e7d69" class=""><strong><br/></strong></p></div><div style="display:contents" dir="auto"><div id="38a803aa-bfc9-80ba-b75d-fade9e61bc7d" class="column-list"><div style="display:contents" dir="auto"><div id="38a803aa-bfc9-8097-bcce-e2b570c870e7" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><figure id="383803aa-bfc9-80cb-88ce-e5d11d25a2b3" class="image"><a href="image%201.png"><img style="width:265.9875183105469px" src="image%201.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="38a803aa-bfc9-8079-bf6d-c6f06507a058" style="width:33.333333333333336%" class="column"><div style="display:contents" dir="ltr"><figure id="383803aa-bfc9-8068-a503-c0673caadf74" class="image"><a href="image%202.png"><img style="width:192px" src="image%202.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="38a803aa-bfc9-80cd-80eb-cc94fb99c562" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="ltr"><figure id="38a803aa-bfc9-80ce-a9f5-dd4ece41ed47" class="image"><a href="image%203.png"><img style="width:320.9861145019531px" src="image%203.png"/></a></figure></div></div></div></div></div><div style="display:contents" dir="auto"><h2 id="373803aa-bfc9-802f-aa14-d583818568cf" class=""><strong>3. Diferença</strong></h2></div><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-805a-81c5-fc78a1b1ec37" class="bulleted-list"><li style="list-style-type:disc"> <strong>O que faz:</strong> Calcula o valor absoluto da diferença matemática entre o chute do jogador (A) e o valor aleatório (B). O circuito garante uma saída sempre positiva, calculando A - B se A ≥ B, e B - A se B &gt; A.</li></ul></div><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-80da-98c2-e49026b99183" class="bulleted-list"><li style="list-style-type:disc"><strong>Como implementar:</strong><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-8008-b236-c3d81440b4d8" class="bulleted-list"><li style="list-style-type:circle">A arquitetura foi implementada utilizando componentes aritméticos de alto nível da biblioteca do Logisim para otimização do espaço.</li></ul></div><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-801c-9090-fbfeee371938" class="bulleted-list"><li style="list-style-type:circle">Foram utilizados dois blocos Subtratores de 4 bits operando em paralelo: o primeiro configurado para calcular a conta A - B e o segundo configurado para calcular B - A.</li></ul></div><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-80d1-83cf-fabc2bea8161" class="bulleted-list"><li style="list-style-type:circle"> Foi inserido um Comparador de Magnitude para avaliar simultaneamente as entradas A e B e identificar qual é o maior valor numérico.</li></ul></div><div style="display:contents" dir="auto"><ul id="383803aa-bfc9-805c-8ee5-e0a10b2595ed" class="bulleted-list"><li style="list-style-type:circle">Por fim, um Multiplexador foi posicionado na saída, utilizando o sinal do Comparador em seu pino seletor. Isso permite que o Multiplexador atue como uma chave lógica inteligente, liberando para a saída final apenas o resultado da subtração que gerou um valor positivo.</li></ul></div><div style="display:contents" dir="ltr"><figure id="383803aa-bfc9-80e7-a333-cc56c02b2e87" class="image"><a href="image%204.png"><img style="width:703.9874877929688px" src="image%204.png"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><h2 id="38a803aa-bfc9-80f3-bb15-e20f2d91315c" class=""><strong>4. Circuito &quot;Cores&quot; (Temperatura do LED RGB)</strong></h2></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-8039-b7cb-e588e64e85c8" class="bulleted-list"><li style="list-style-type:disc"><strong>O que faz:</strong> Determina as intensidades do LED RGB (canal vermelho e azul) com base na distância calculada pelo circuito de Diferença. Quanto menor for a diferença (chute próximo do alvo), maior será a intensidade da luz Vermelha (&quot;quente&quot;). Quanto maior a diferença (chute longe do alvo), maior será a intensidade da luz Azul (&quot;frio&quot;).</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80b9-9f51-de6a34d5c228" class="bulleted-list"><li style="list-style-type:disc"><strong>Como implementar:</strong><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-801d-a378-ec5ce46a684a" class="bulleted-list"><li style="list-style-type:circle">O circuito recebe uma entrada de 4 bits e produz duas saídas de 8 bits.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80f4-8281-f1b36571f131" class="bulleted-list"><li style="list-style-type:circle">Seguindo as especificações do projeto, os 4 bits menos significativos das saídas de cor foram preenchidos de forma estática com nível lógico baixo (<code>0000</code>), utilizando um componente de Constante.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80c9-81bc-dc09cc5cbec1" class="bulleted-list"><li style="list-style-type:circle">Os 4 bits mais significativos ditam a intensidade. Para o canal <strong>Azul</strong>, os 4 bits do sinal da Diferença são injetados diretamente. Para o canal <strong>Vermelho</strong>, o sinal da Diferença é previamente invertido por meio de uma porta lógica NOT de 4 bits, garantindo o comportamento inversamente proporcional.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-8027-9371-edae45d7e797" class="bulleted-list"><li style="list-style-type:circle">Por fim, Distribuidores (Splitters) foram configurados em modo de concatenação para agrupar os barramentos de 4 bits, formando os barramentos finais de 8 bits exigidos pelos pinos do LED RGB.</li></ul></div><div style="display:contents" dir="ltr"><figure id="38a803aa-bfc9-805a-ae95-cc9c8c4b57ea" class="image"><a href="image%205.png"><img style="width:704px" src="image%205.png"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><h2 id="38a803aa-bfc9-80a5-a9dc-f11a5c68b0e0" class="">5. Integração Final: O Circuito Principal (<code>Game</code>)</h2></div><div style="display:contents" dir="auto"><p id="38a803aa-bfc9-807c-bc6b-d19fd06f394b" class=""><strong>1. Objetivo do Circuito</strong><br/>O circuito principal atua como a placa-mãe do projeto, integrando todos os subcircuitos desenvolvidos previamente (<code>Comparador</code>, <code>Diferença</code>, <code>Cores</code> e <code>Decodificador</code>) para compor a lógica completa do jogo &quot;Guess The Number&quot;. Ele gerencia as interações do jogador, processa a matemática do jogo e aciona os elementos visuais de resposta.</p></div><div style="display:contents" dir="auto"><p id="38a803aa-bfc9-80f8-94fe-c06ce04d3d9f" class=""><strong>2. Interfaces de Entrada e Saída (I/O)</strong><br/>A interação com o usuário é feita através dos seguintes componentes:</p></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80ea-bf1f-c937eb45c2bf" class="bulleted-list"><li style="list-style-type:disc"><strong>Entradas:</strong><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80fa-95d9-f65016c7b294" class="bulleted-list"><li style="list-style-type:circle"><code>chute</code>: Pino de 4 bits para a inserção do palpite do jogador.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-8025-baa8-caa0f0a5c9dd" class="bulleted-list"><li style="list-style-type:circle"><code>new</code>: Pino de 1 bit que atua como pulso de relógio (<em>clock</em>) para iniciar uma nova rodada.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-800b-9887-c5e42971a0d5" class="bulleted-list"><li style="list-style-type:circle"><code>confirmar</code>: Pino de 1 bit utilizado para submeter o palpite final.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-801a-bc88-c9259bfd9cca" class="bulleted-list"><li style="list-style-type:disc"><strong>Saídas:</strong><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-804e-a186-c9b16e4842b6" class="bulleted-list"><li style="list-style-type:circle"><strong>Display de 7 Segmentos:</strong> Responsável por exibir o valor do <code>chute</code> em formato hexadecimal.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80ac-9abf-c1f3255f7ec2" class="bulleted-list"><li style="list-style-type:circle"><strong>LED RGB:</strong> Atua como um sistema de dicas por &quot;temperatura&quot;, mudando de cor conforme a proximidade do palpite.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80dd-b1f9-fc282c2a33df" class="bulleted-list"><li style="list-style-type:circle"><strong>LED Verde (</strong><code><strong>acertou?</strong></code><strong>):</strong> Indicador visual de vitória.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="38a803aa-bfc9-80c1-81c2-ce5aad01d4db" class=""><strong>3. Arquitetura e Funcionamento do Sistema</strong></p></div><div style="display:contents" dir="auto"><p id="38a803aa-bfc9-80cd-b058-dd4d1a521de2" class="">A lógica do circuito principal foi dividida em quatro blocos operacionais:</p></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80c2-a854-c13ae270eb59" class="bulleted-list"><li style="list-style-type:disc"><strong>Geração do Número Secreto:</strong><br/>A base do jogo é composta por um &quot;Gerador Aleatório&quot; conectado a um &quot;Registrador&quot;, ambos configurados para 4 bits de dados. O pino <code>new</code> está conectado à entrada de <em>clock</em> de ambos os componentes. Sempre que ativado, o gerador cria um novo valor aleatório e o registrador armazena essa informação de forma assíncrona, fixando o alvo numérico da rodada.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-8039-9042-daabc5da0c63" class="bulleted-list"><li style="list-style-type:disc"><strong>Decodificação Visual do Palpite:</strong><br/>O barramento de 4 bits do pino <code>chute</code> passa por um Distribuidor (<em>Splitter</em>), que separa o sinal em 4 bits individuais para alimentar o subcircuito <code>Decodificador</code>. As 7 saídas deste subcircuito foram mapeadas e conectadas aos respectivos terminais do Display de 7 Segmentos, garantindo a exibição correta dos caracteres hexadecimais (0 a F) conforme a tabela verdade projetada.</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-8073-a251-f4be9061c215" class="bulleted-list"><li style="list-style-type:disc"><strong>Cálculo de Distância e Dica Visual (Temperatura):</strong><br/>O valor do <code>chute</code> e o número aleatório armazenado no registrador são enviados ao subcircuito <code>Diferença</code>. A saída deste módulo (a distância absoluta entre os valores) alimenta o subcircuito <code>Cores</code>. O subcircuito <code>Cores</code> processa o sinal e entrega duas saídas de 8 bits ligadas aos canais Vermelho e Azul do LED RGB. O pino correspondente à cor Verde do RGB foi aterrado utilizando uma constante de valor zero (8 bits).</li></ul></div><div style="display:contents" dir="auto"><ul id="38a803aa-bfc9-80af-a769-e3b251824e05" class="bulleted-list"><li style="list-style-type:disc"><strong>Lógica de Confirmação e Vitória:</strong><br/>Os barramentos do palpite e do alvo são enviados ao subcircuito <code>Comparador</code>. Para evitar que o jogo declare vitória instantaneamente enquanto o usuário altera os bits de entrada, adicionou-se uma camada extra de controle utilizando uma porta lógica <strong>AND</strong> de duas entradas. A saída do <code>Comparador</code> foi ligada a um dos terminais da porta AND, e o pino de entrada <code>confirmar</code> foi ligado ao outro terminal. O LED de vitória (<code>acertou?</code>) só é aceso caso o palpite seja idêntico ao número secreto <strong>e</strong> o jogador confirme ativamente a jogada.</li></ul></div><div style="display:contents" dir="ltr"><figure id="38a803aa-bfc9-80ec-a597-c737f1be0b97" class="image"><a href="image%206.png"><img style="width:703.9874877929688px" src="image%206.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="38a803aa-bfc9-80e6-a2a5-e12c80099c14" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
